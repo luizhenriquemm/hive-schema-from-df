@@ -1,6 +1,6 @@
 # hive-schema-from-df
 
-The function hive_schema(df.schema) returns a string that can be used for table creation in Apache Hive or Databricks SQL. Example:
+The function hive_schema(df.schema) returns a string (Apache Hive schema format) that can be used for table creation in Databricks SQL. Example:
 
 ``` python
 from pyspark.sql.types import *
