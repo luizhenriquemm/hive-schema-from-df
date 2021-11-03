@@ -7,18 +7,18 @@ def hive_schema(item, layer=0):
   if (isinstance(item, StructType)):
     for l_item in item:
       f += ", " if f != "" and layer == 0 else "," if f != "" else ""
-      f += fn(l_item, layer+1)
+      f += hive_schema(l_item, layer+1)
   elif (isinstance(item, MapType)):
     f += rel[str(item.keyType)] + ":" + rel[str(item.valueType)]
   elif (isinstance(item, ArrayType)):
-    f += fn(item.elementType, layer+1)
+    f += hive_schema(item.elementType, layer+1)
   elif (isinstance(item, StructField)):
     if (isinstance(item.dataType, StructType)):
-      f += str(item.name) + (" struct<" if layer <= 1 else ":struct<") + fn(item.dataType, layer+1) + ">"
+      f += str(item.name) + (" struct<" if layer <= 1 else ":struct<") + hive_schema(item.dataType, layer+1) + ">"
     elif (isinstance(item.dataType, MapType)):
-      f += str(item.name) + (" map<" if layer <= 1 else ":map<") + fn(item.dataType, layer+1) + ">"
+      f += str(item.name) + (" map<" if layer <= 1 else ":map<") + hive_schema(item.dataType, layer+1) + ">"
     elif (isinstance(item.dataType, ArrayType)):
-      f += str(item.name) + (" array<" if layer <= 1 else ":array<") + fn(item.dataType, layer+1) + ">"
+      f += str(item.name) + (" array<" if layer <= 1 else ":array<") + hive_schema(item.dataType, layer+1) + ">"
     else:
       f += str(item.name) + (" " if layer <= 1 else ":") + rel[str(item.dataType)]
   else:
