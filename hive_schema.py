@@ -1,3 +1,5 @@
+from pyspark.sql.types import *
+
 def hive_schema(item, layer=0):
   rel = {"ByteType": "tinyint", "ShortType": "smallint", "IntegerType": "int", "LongType": "bigint", "FloatType": "float", "DoubleType": "double", "DecimalType": "decimal(10,0)",
   "StringType": "string", "BinaryType": "binary", "BooleanType": "bool", "TimestampType": "timestamp", "DateType": "date", "LongType": "bigint", "DoubleType": "double", "DateType": "date"}
